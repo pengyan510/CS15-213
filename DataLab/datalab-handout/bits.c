@@ -190,7 +190,7 @@ int allOddBits(int x) {
  *   Rating: 2
  */
 int negate(int x) {
-  return 2;
+  return ~x + 1;
 }
 //3
 /* 
@@ -203,7 +203,12 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-  return 2;
+  int other = x >> 6;
+  int digit_1_and_2 = (x & 0x6) >> 1;
+  int digit_3 = (x & 0x8) >> 3;
+  int digit_4_and_5 = (x ^ 0x30) >> 4;
+  
+  return (!other) & (!digit_4_and_5) & ((!digit_3) | (!digit_1_and_2));
 }
 /* 
  * conditional - same as x ? y : z 
